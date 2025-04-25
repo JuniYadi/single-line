@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Multiline to Single Line Converter</title>
+  <title>Multiline to JSON POST Body String</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -24,25 +24,24 @@
 </head>
 <body>
 
-  <h2>Multiline to Single Line Converter</h2>
+  <h2>Multiline to JSON-Compatible POST String</h2>
 
   <label for="input">Multiline Input:</label>
-  <textarea id="input" placeholder="Enter multiline text here..."></textarea>
+  <textarea id="input" placeholder="Enter multiline text..."></textarea>
 
-  <button onclick="convertToSingleLine()">Convert</button>
+  <button onclick="convertForPost()">Convert for POST Body</button>
 
-  <label for="output">Single Line Output:</label>
+  <label for="output">Result for JSON body value:</label>
   <textarea id="output" readonly placeholder="Result will appear here..."></textarea>
 
   <script>
-    function convertToSingleLine() {
-      const inputText = document.getElementById('input').value;
-      const singleLine = inputText
-        .split(/\r?\n/)
-        .map(line => line.trim())
-        .filter(line => line !== "")
-        .join(' ');
-      document.getElementById('output').value = singleLine;
+    function convertForPost() {
+      const input = document.getElementById('input').value;
+      // Convert to JSON-safe string
+      const jsonString = JSON.stringify(input);
+      // Remove surrounding quotes
+      const trimmed = jsonString.substring(1, jsonString.length - 1);
+      document.getElementById('output').value = trimmed;
     }
   </script>
 
